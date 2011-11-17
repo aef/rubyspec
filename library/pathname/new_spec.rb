@@ -31,26 +31,3 @@ describe "Pathname.[]" do
     Pathname[path].tainted?.should == true
   end
 end
-
-describe "Kernel#Pathname()" do
-  it "returns a new Pathname Object with 1 argument but warns about deprecation" do
-    lambda {
-      Pathname('').should be_kind_of(Pathname)
-    }.should complain('Kernel#Pathname is deprecated; use Pathname.[] instead')
-
-  end
-
-  it "raises an ArgumentError when called with \0 but warns about deprecation" do
-    lambda {
-      lambda { Pathname("\0")}.should raise_error(ArgumentError)
-    }.should complain('Kernel#Pathname is deprecated; use Pathname.[] instead')
-  end
-
-  it "is tainted if path is tainted but warns about deprecation" do
-    lambda {
-      path = '/usr/local/bin'.taint
-      Pathname(path).tainted?.should == true
-    }.should complain('Kernel#Pathname is deprecated; use Pathname.[] instead')
-  end
-
-end
